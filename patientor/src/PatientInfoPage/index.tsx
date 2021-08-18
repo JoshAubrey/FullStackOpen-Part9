@@ -8,7 +8,7 @@ import { Patient } from "../types";
 // import { Patient, FakeEntryFormValues } from "../types";
 import { setPatient, useStateValue } from '../state';
 
-//import Entries from '../components/Entries';
+import Entries from '../components/Entries';
 import GenderIcon from '../components/GenderIcon';
 //import AddEntryModal from '../AddEntryModal';
 //import { Button } from 'semantic-ui-react';
@@ -71,8 +71,8 @@ const PatientInfoPage = () => {
         <p>ssn: {patient.ssn}</p>
         <p>occupation: {patient.occupation}</p>
       </div>
-      {/* <Entries entries={patient.entries} />
-      <AddEntryModal
+      <Entries entries={patient.entries} />
+      {/* <AddEntryModal
         modalOpen={modalOpen}
         onSubmit={submitNewEntry}
         onClose={closeModal}
