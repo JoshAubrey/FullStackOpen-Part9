@@ -77,7 +77,7 @@ export interface Patient {
   entries: Entry[];
 }
 
-export interface FakeEntryFormValues extends Omit<BaseEntry, 'id'> {
+export interface EntryFormValues extends Omit<BaseEntry, 'id'> {
   type: EntryType;
   discharge?: Discharge;
   healthCheckRating?: HealthCheckRating;

@@ -1,44 +1,42 @@
-//import React, { useState, useEffect } from 'react';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 
 import { apiBaseUrl } from '../constants';
-import { Patient } from "../types";
-// import { Patient, FakeEntryFormValues } from "../types";
+import { Patient, EntryFormValues } from "../types";
 import { setPatient, useStateValue } from '../state';
 
 import Entries from '../components/Entries';
 import GenderIcon from '../components/GenderIcon';
-//import AddEntryModal from '../AddEntryModal';
-//import { Button } from 'semantic-ui-react';
+import AddEntryModal from '../AddEntryModal';
+import { Button } from 'semantic-ui-react';
 
 const PatientInfoPage = () => {
   const { id } = useParams<{ id: string }>();
   const [{ patient }, dispatch] = useStateValue();
-  // const [modalOpen, setModalOpen] = useState<boolean>(false);
-  // const [error, setError] = useState<string | undefined>();
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
 
-//   const openModal = (): void => setModalOpen(true);
+  const openModal = (): void => setModalOpen(true);
 
-//   const closeModal = (): void => {
-//     setModalOpen(false);
-//     setError(undefined);
-//   };
+  const closeModal = (): void => {
+    setModalOpen(false);
+    setError(undefined);
+  };
 
-//   const submitNewEntry = async (values: FakeEntryFormValues) => {
-//     try {
-//       const { data: updatedPatient } = await axios.post<Patient>(
-//         `${apiBaseUrl}/patients/${id}/entries`,
-//         values
-//       );
-//       dispatch( setPatient(updatedPatient) );
-//       closeModal();
-//     } catch (e) {
-//       console.error(e.response?.data || 'Unknown Error');
-//       setError(e.response?.data || 'Unknown error');
-//     }
-//   };
+  const submitNewEntry = async (values: EntryFormValues) => {
+    try {
+      const { data: updatedPatient } = await axios.post<Patient>(
+        `${apiBaseUrl}/patients/${id}/entries`,
+        values
+      );
+      dispatch( setPatient(updatedPatient) );
+      closeModal();
+    } catch (e) {
+      console.error(e.response?.data || 'Unknown Error');
+      setError(e.response?.data || 'Unknown error');
+    }
+  };
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -72,13 +70,13 @@ const PatientInfoPage = () => {
         <p>occupation: {patient.occupation}</p>
       </div>
       <Entries entries={patient.entries} />
-      {/* <AddEntryModal
+      <AddEntryModal
         modalOpen={modalOpen}
         onSubmit={submitNewEntry}
         onClose={closeModal}
         error={error}
       />
-      <Button onClick={() => openModal()}>Add New Entry</Button> */}
+      <Button onClick={() => openModal()}>Add New Entry</Button>
     </div>
   );
 };
